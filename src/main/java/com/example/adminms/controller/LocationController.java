@@ -3,9 +3,14 @@ package com.example.adminms.controller;
 
 import com.example.adminms.entity.Location;
 import com.example.adminms.service.AdminService;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin-mapper")
@@ -20,7 +25,7 @@ public class LocationController {
     }
 
     @GetMapping("/fetch/all/locations")
-    public ResponseEntity getAllLocations(){
+    public ResponseEntity<List<Location>> getAllLocations(){
         return adminService.getAllLocations();
     }
 

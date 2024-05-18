@@ -6,6 +6,9 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AdminServiceImpl implements AdminService{
 
@@ -13,13 +16,14 @@ public class AdminServiceImpl implements AdminService{
     private RestTemplate restTemplate;
 
     @Override
-    public ResponseEntity getAllLocations() {
+    public ResponseEntity<List<Location>> getAllLocations() {
         HttpHeaders headers= new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity=new HttpEntity(headers);
 
-        ResponseEntity<String> response=restTemplate.exchange("http://localhost:8081/location-ms/location-mapper/fetch/all/locations",HttpMethod.GET,entity, String.class);
-        return response;
+        ResponseEntity<List> response=restTemplate.exchange("http://localhost:8081/location-ms/location-mapper/fetch/all/locations",HttpMethod.GET,entity, List.class);
+        List<Location> responseList = response.getBody();
+        return new ResponseEntity<>(responseList, HttpStatus.OK);
     }
 
     @Override
