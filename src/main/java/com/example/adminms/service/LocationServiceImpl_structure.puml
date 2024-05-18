@@ -70,7 +70,7 @@ config=StructureConfiguration;
     "showPackageLevels": 2,
     "showDetailedClassStructure": true
   },
-  "rootClass": "com.example.adminms.service.AdminService",
+  "rootClass": "com.example.adminms.service.LocationServiceImpl",
   "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
 }
 diagram meta data end '/
@@ -95,26 +95,11 @@ subgraph cluster_1322970774 {
 	fillcolor="#d8d8d8"
 	style=filled
    
-   AdminService994713867[
+   LocationController608756102[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
-<TR><TD ALIGN="LEFT" >(I)AdminService</TD></TR>
+<TR><TD ALIGN="LEFT" >(C)LocationController</TD></TR>
 <HR/>
-<TR><TD ALIGN="LEFT" >+ addLocation(location: Location): ResponseEntity</TD></TR>
-<TR><TD ALIGN="LEFT" >+ deleteLocation(locationID: Integer): ResponseEntity</TD></TR>
-<TR><TD ALIGN="LEFT" >+ getAllLocations(): ResponseEntity&lt;List&lt;Location&gt;&gt;</TD></TR>
-<TR><TD ALIGN="LEFT" >+ updateLocation(location: Location, locationID: Integer): ResponseEntity</TD></TR>
-</TABLE>>
-	style=filled
-	margin=0
-	shape=plaintext
-	fillcolor="#F1E5FD"
-];
-
-AdminServiceImpl994713867[
-	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
-<TR><TD ALIGN="LEFT" >(C)AdminServiceImpl</TD></TR>
-<HR/>
-<TR><TD ALIGN="LEFT" >-   restTemplate: RestTemplate [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   locationService: LocationService [1]</TD></TR>
 <HR/>
 <TR><TD ALIGN="LEFT" >+ addLocation(location: Location): ResponseEntity</TD></TR>
 <TR><TD ALIGN="LEFT" >+ deleteLocation(locationID: Integer): ResponseEntity</TD></TR>
@@ -126,11 +111,11 @@ AdminServiceImpl994713867[
 	fillcolor="#FFFFFF"
 ];
 
-LocationController608756102[
+LocationServiceImpl994713867[
 	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
-<TR><TD ALIGN="LEFT" >(C)LocationController</TD></TR>
+<TR><TD ALIGN="LEFT" >(C)LocationServiceImpl</TD></TR>
 <HR/>
-<TR><TD ALIGN="LEFT" >-   adminService: AdminService [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   restTemplate: RestTemplate [1]</TD></TR>
 <HR/>
 <TR><TD ALIGN="LEFT" >+ addLocation(location: Location): ResponseEntity</TD></TR>
 <TR><TD ALIGN="LEFT" >+ deleteLocation(locationID: Integer): ResponseEntity</TD></TR>
@@ -145,9 +130,8 @@ LocationController608756102[
 } 
 
 'edges    
-AdminService994713867 -> AdminServiceImpl994713867[arrowhead=none, arrowtail=empty, dir=both];
-LocationController608756102 -> AdminService994713867[label="adminService
-[1]"];
+LocationController608756102 -> LocationServiceImpl994713867[label="locationService
+[1]", arrowhead=none];
     
 }
 @enduml

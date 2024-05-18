@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface AdminService {
+public interface LocationService {
     ResponseEntity<List<Location>> getAllLocations();
 
     ResponseEntity addLocation(Location location);
