@@ -1,0 +1,80 @@
+@startuml
+class org.example.theater.exception.DuplicateTheaterFound {
++ <<Create>> DuplicateTheaterFound(int)
+}
+
+class org.example.theater.service.TheaterServiceImpl {
+- TheaterRepository theaterRepository
++ int validation(Theater)
++ ResponseEntity<Theater> addTheater(Theater)
++ Theater getTheaterById(int)
++ ResponseEntity<Theater> updateTheater(Integer,Theater)
++ ResponseEntity<String> deleteTheater(int)
++ List<Theater> getTheatersByLocation(int)
+}
+
+
+class org.example.theater.controller.TheaterController {
+- TheaterService theaterService
++ List<Theater> getTheaters(int)
++ ResponseEntity<Theater> addTheater(Theater)
++ Theater getTheater(int)
++ ResponseEntity<Theater> updateTheater(Integer,Theater)
++ ResponseEntity<String> deleteTheater(int)
+}
+
+
+class org.example.theater.entity.Theater {
+- int id
+- String name
+- Integer locationId
++ int getId()
++ void setId(int)
++ String getName()
++ void setName(String)
++ Integer getLocationId()
++ void setLocationId(Integer)
+}
+
+
+interface org.example.theater.service.TheaterService {
+~ List<Theater> getTheatersByLocation(int)
+~ ResponseEntity<Theater> addTheater(Theater)
+~ Theater getTheaterById(int)
+~ ResponseEntity<Theater> updateTheater(Integer,Theater)
+~ ResponseEntity<String> deleteTheater(int)
++ int validation(Theater)
+}
+
+class org.example.theater.TheaterProjectApplication {
++ {static} void main(String[])
+}
+
+class org.example.theater.entity.Location {
+- Integer id
+- String name
++ Integer getId()
++ void setId(Integer)
++ String getName()
++ void setName(String)
+}
+
+
+interface org.example.theater.repository.TheaterRepository {
+~ List<Theater> findByLocationId(int)
+~ List<Theater> findByName(String)
+}
+
+class org.example.theater.exception.TheaterNotFoundException {
++ <<Create>> TheaterNotFoundException(int)
+}
+
+
+
+org.example.theater.exception.RuntimeException <|-- org.example.theater.exception.DuplicateTheaterFound
+org.example.theater.service.TheaterService <|.. org.example.theater.service.TheaterServiceImpl
+java.io.Serializable <|.. org.example.theater.entity.Theater
+java.io.Serializable <|.. org.example.theater.entity.Location
+org.springframework.data.jpa.repository.JpaRepository <|-- org.example.theater.repository.TheaterRepository
+org.example.theater.exception.RuntimeException <|-- org.example.theater.exception.TheaterNotFoundException
+@enduml

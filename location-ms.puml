@@ -1,0 +1,67 @@
+@startuml
+class org.example.location.LocationTests {
+~ void contextLoads()
+}
+
+class org.example.location.exception.LocationNotFoundException {
++ <<Create>> LocationNotFoundException(int)
+}
+
+class org.example.location.controller.LocationController {
+- LocationService locationService
++ ResponseEntity<Location> addLocation(Location)
++ Location getLocation(int)
++ ResponseEntity<Location> updateLocation(int,Location)
++ ResponseEntity<List<Location>> getAllLocations()
++ ResponseEntity<String> deleteLocation(int)
+}
+
+
+class org.example.location.service.LocationServiceImpl {
+- LocationRepository locationRepository
++ <<Create>> LocationServiceImpl(LocationRepository)
++ int validation(Location)
++ ResponseEntity<Location> addLocation(Location)
++ Location getLocation(int)
++ List<Location> getAllLocations()
++ ResponseEntity<Location> updateLocation(int,Location)
++ ResponseEntity<String> deleteLocation(int)
+}
+
+
+class org.example.location.exception.DuplicateLocationFound {
++ <<Create>> DuplicateLocationFound(int)
+}
+
+interface org.example.location.repository.LocationRepository {
+~ List<Location> findByName(String)
+}
+note left of org.example.location.repository.LocationRepository::findByName(String)
+Location findByName(String name);
+end note
+
+class org.example.location.Location {
++ {static} void main(String[])
+}
+
+class org.example.location.entity.Location {
+- Integer id
+- String name
+}
+
+interface org.example.location.service.LocationService {
++ ResponseEntity<Location> addLocation(Location)
++ Location getLocation(int)
++ ResponseEntity<Location> updateLocation(int,Location)
++ ResponseEntity<String> deleteLocation(int)
++ List<Location> getAllLocations()
+}
+
+
+
+org.example.location.exception.RuntimeException <|-- org.example.location.exception.LocationNotFoundException
+org.example.location.service.LocationService <|.. org.example.location.service.LocationServiceImpl
+org.example.location.exception.RuntimeException <|-- org.example.location.exception.DuplicateLocationFound
+org.springframework.data.jpa.repository.JpaRepository <|-- org.example.location.repository.LocationRepository
+java.io.Serializable <|.. org.example.location.entity.Location
+@enduml

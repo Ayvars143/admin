@@ -1,0 +1,134 @@
+@startuml
+interface com.example.adminms.service.TheaterService {
+~ ResponseEntity fetchTheatersByLocation(Integer)
+~ ResponseEntity addTheater(Theater)
+~ ResponseEntity updateTheater(Theater,Integer)
+~ ResponseEntity deleteTheater(Integer)
+~ ResponseEntity fetchTheaterById(Integer)
+}
+
+interface com.example.adminms.service.AdminService {
+~ ResponseEntity<List<Location>> getAllLocations()
+~ ResponseEntity addLocation(Location)
+~ ResponseEntity updateLocation(Location,Integer)
+~ ResponseEntity deleteLocation(Integer)
+}
+
+class com.example.adminms.controller.ScreenController {
+- ScreenService screenService
++ ResponseEntity addScreen(Screen)
++ ResponseEntity getScreens(Integer)
++ ResponseEntity updateScreen(Integer,Screen)
+}
+
+
+class com.example.adminms.entity.Location {
+- Integer id
+- String name
++ Integer getId()
++ void setId(Integer)
++ String getName()
++ void setName(String)
+}
+
+
+class com.example.adminms.controller.LocationController {
+- AdminService adminService
++ ResponseEntity addLocation(Location)
++ ResponseEntity<List<Location>> getAllLocations()
++ ResponseEntity updateLocation(Location,Integer)
++ ResponseEntity deleteLocation(Integer)
+}
+
+
+class com.example.adminms.service.AdminServiceImpl {
+- RestTemplate restTemplate
++ ResponseEntity<List<Location>> getAllLocations()
++ ResponseEntity addLocation(Location)
++ ResponseEntity updateLocation(Location,Integer)
++ ResponseEntity deleteLocation(Integer)
+}
+
+
+class com.example.adminms.AdminMsApplication {
++ {static} void main(String[])
++ OpenAPI customOpenAPI()
++ RestTemplate getRestTemplate()
+}
+
+class com.example.adminms.entity.Theater {
+- int id
+- String name
+- Integer locationId
++ int getId()
++ void setId(int)
++ String getName()
++ void setName(String)
++ Integer getLocationId()
++ void setLocationId(Integer)
+}
+
+
+class com.example.adminms.controller.ThreaterController {
+- TheaterService theaterService
++ ResponseEntity fetchTheaterByLocation(Integer)
++ ResponseEntity addTheater(Theater)
++ ResponseEntity updateTheater(Theater,Integer)
++ ResponseEntity deleteTheater(Integer)
++ ResponseEntity fetchTheaterById(Integer)
+}
+
+
+class com.example.adminms.service.TheaterServiceImpl {
+- RestTemplate restTemplate
++ ResponseEntity fetchTheatersByLocation(Integer)
++ ResponseEntity addTheater(Theater)
++ ResponseEntity updateTheater(Theater,Integer)
++ ResponseEntity deleteTheater(Integer)
++ ResponseEntity fetchTheaterById(Integer)
+}
+
+
+interface com.example.adminms.service.ScreenService {
+~ ResponseEntity addScreen(Screen)
+~ ResponseEntity getScreensByTheaterId(Integer)
+~ ResponseEntity updateScreen(Integer,Screen)
+}
+
+class com.example.adminms.entity.Screen {
+- int id
+- Integer theaterId
+- String name
+- Integer noOfSeats
+- Integer noOfRows
+- Integer noOfColumns
++ int getId()
++ void setId(int)
++ Integer getTheaterId()
++ void setTheaterId(Integer)
++ String getName()
++ void setName(String)
++ Integer getNoOfSeats()
++ void setNoOfSeats(Integer)
++ Integer getNoOfRows()
++ void setNoOfRows(Integer)
++ Integer getNoOfColumns()
++ void setNoOfColumns(Integer)
+}
+
+
+class com.example.adminms.service.ScreenServiceImpl {
+- RestTemplate restTemplate
++ ResponseEntity addScreen(Screen)
++ ResponseEntity getScreensByTheaterId(Integer)
++ ResponseEntity updateScreen(Integer,Screen)
+}
+
+
+
+
+com.example.adminms.service.AdminService <|.. com.example.adminms.service.AdminServiceImpl
+java.io.Serializable <|.. com.example.adminms.entity.Theater
+com.example.adminms.service.TheaterService <|.. com.example.adminms.service.TheaterServiceImpl
+com.example.adminms.service.ScreenService <|.. com.example.adminms.service.ScreenServiceImpl
+@enduml
